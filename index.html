@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SENTRIX — Static Security Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <div class="brand">
+          <div class="logo">S</div>
+          <div>
+            <div class="title">SENTRIX</div>
+            <div class="subtitle">Static security analysis (AST + regex)</div>
+          </div>
+        </div>
+        <div class="controls">
+          <label class="field">
+            <span>Language</span>
+            <select id="language">
+              <option value="python" selected>Python</option>
+              <option value="javascript">JavaScript</option>
+              <option value="typescript">TypeScript</option>
+              <option value="java">Java</option>
+              <option value="php">PHP</option>
+              <option value="ruby">Ruby</option>
+              <option value="go">Go</option>
+              <option value="text">Other</option>
+            </select>
+          </label>
+          <button id="analyzeBtn" class="btn primary">Analyze</button>
+        </div>
+      </header>
+
+      <main class="grid">
+        <section class="panel">
+          <div class="panelHeader">
+            <div class="panelTitle">Code input</div>
+            <div class="panelHint">Paste code on the left, findings appear on the right.</div>
+          </div>
+          <textarea id="code" class="code" spellcheck="false" placeholder="Paste your code here..."></textarea>
+          <div class="panelFooter">
+            <div class="muted">
+              Python uses AST + regex. Other languages are regex-only.
+            </div>
+            <div id="status" class="status"></div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panelHeader findingsHeader">
+            <div>
+              <div class="panelTitle">Findings</div>
+              <div class="panelHint">Severity, CWE, line number, and fix recommendations.</div>
+            </div>
+            <div class="risk">
+              <div class="riskLabel">Risk score</div>
+              <div id="riskScore" class="riskScore">0</div>
+              <div class="riskMax">/ 100</div>
+            </div>
+          </div>
+
+          <div id="findings" class="findings">
+            <div class="emptyState">
+              Run an analysis to see results here.
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
+
